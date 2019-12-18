@@ -1,7 +1,7 @@
-"""ebook URL Configuration
+"""movie_y URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.0/topics/http/urls/
+    https://docs.djangoproject.com/en/2.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from ebook.apps.book.views import BookListView
+from ebook.apps.book.views import BookListView, ArticleListView
 
+app_name = 'movie'
 urlpatterns = [
-    path('book/', include('ebook.apps.book.urls', namespace='book')),
-    path('admin/', admin.site.urls),
-    path('', BookListView.as_view(), name='index'),
+    path('', BookListView.as_view(), name='book_list'),
+    path('<int:pk>/', ArticleListView.as_view(), name='article_list'),
 ]

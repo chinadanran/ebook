@@ -1,0 +1,8 @@
+First Name,Last Name,Email,Phone,User Status,Organization,No Permission,All Permission,MODIFY EVENT PERMISSION,MODIFY USER PERMISSION,MODIFY GROUP PERMISSION,VIEW EVENT PERMISSION,VIEW USER PERMISSION,VIEW GROUP PERMISSION,APPROVE CREDENTIAL SUBMISSIONS PERMISSION,GUEST CHECK IN PERMISSION
+Xue,Wang,wangxue_1@aragoncs.com,15101619060,active,Aragon,Yes,,,,,,,,,
+Xue,Wang,wangxue_2@aragoncs.com,15101619060,active,Aragon,,Yes,,,,,,,,
+Xue,Wang,wangxue_3@aragoncs.com,15101619060,active,Aragon,,,,,,Yes,Yes,Yes,,
+Xue,Wang,wangxue_4@aragoncs.com,15101619061,inactive,Aragon,Yes,,,,,,,,,
+Xue,Wang,wangxue_5@aragoncs.com,,inactive,Aragon,Yes,,,,,,,,,
+Xue,Wang,wangxue_6@aragoncs.c,15101619063,inactive,Aragon,Yes,,,,,,,,,
+Xue,Wang,wangxue_7@aragoncs.com,15101619064,inactive,Aragon,Yes,Yes,,,,,,,,

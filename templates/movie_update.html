@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="contentpanel">
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          {% csrf_token %}
+          <img src="{{ book.img_url }}" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+          <div class="caption">
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.auth}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-offset-6 col-md-offset-4">
+      {% for object in object_list %}
+        <div class="col-sm-2 col-md-3 mr10 mb10">
+          <a>{{ object.title }}</a>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+
+    </div>
+{% endblock %}

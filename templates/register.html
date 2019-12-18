@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static widget_tweaks %}
+
+{% block body_class %}signin{% endblock %}
+{% block body %}
+  <section>
+    <div class="signinpanel">
+      <div class="row">
+        <div class="col-md-7">
+          <div class="signin-info">
+
+            <div class="logopanel">
+                <img src="{% static "images/logo.png" %}" alt="Logo" style="margin: 0">
+            </div><!-- logopanel -->
+
+            <div class="mb20"></div>
+
+            <h5><strong>Welcome to My Cinema!</strong></h5>
+            <ul>
+                <li><i class="fa fa-arrow-circle-o-right mr5"></i> View some movies</li>
+                <li><i class="fa fa-arrow-circle-o-right mr5"></i> Rate the video</li>
+                <li><i class="fa fa-arrow-circle-o-right mr5"></i> and much more...</li>
+            </ul>
+          </div><!-- signin0-info -->
+        </div><!-- col-sm-7 -->
+
+        <div class="col-md-5">
+          <form method="post" action="">
+            <h4 class="nomargin">Register</h4>
+            <p class="mt5 mb20">Register to access your account.</p>
+            {% csrf_token %}
+            {% render_field form.email class="form-control uname mb10" placeholder="邮箱" %}
+            {% render_field form.verification_code class="form-control uname mb10" placeholder="验证码" %}
+            {% render_field form.password class="form-control pword mb10" placeholder="密码" type="password" %}
+            {% render_field form.confirm_pwd class="form-control pword mb10" placeholder="确认密码" type="password" %}
+            {% if form.errors %}
+              <label class="error">输入有误</label>
+            {% endif %}
+              <label class="error" id="code_error"></label>
+            <button class="btn btn-info btn-block btn-loading" id="get_code" data-loading-text="<div class='la-ball-clip-rotate la-21'><div></div></div>" type="button">获取验证码</button>
+            <button class="btn btn-info btn-block btn-loading" data-loading-text="<div class='la-ball-clip-rotate la-21'><div></div></div>" type="submit">注册</button>
+          </form>
+        </div><!-- col-sm-5 -->
+      </div><!-- row -->
+
+      <div class="signup-footer">
+        <div class="pull-left">
+            &copy; 2019. All Rights Reserved. MyCinema
+        </div>
+      </div>
+    </div><!-- signin -->
+  </section>
+{% endblock %}
+
+{% block js %}
+  <script>
+      $('#get_code').click(function () {
+          $.ajax({
+              url :'{% url 'accounts:get_verify_code' %}' + '?email=' + $('#id_email').val(),
+              type : 'get',
+              success : function(data){
+                  $('#code_error').text(data['message']);
+                  if (data['status_code'] === 200){
+                      $('#get_code').addClass('disabled')
+                  }
+              }
+          })
+      });
+  </script>
+{% endblock %}

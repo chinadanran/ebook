@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="contentpanel">
+    {% if is_paginated %}
+
+      <div style="text-align: left;" class="mb20">
+        <ul class="pagination pagination-split" style="margin:0;">
+          <li><a href="{% url name_space %}?page=1&query={{ request.GET.query }}">首页</a></li>
+          {% if page_obj.has_previous %}
+            <li><a href="{% url name_space %}?page={{ page_obj.previous_page_number }}&query={{ request.GET.query }}"><i
+              class="fa fa-angle-left"></i></a></li>
+          {% endif %}
+          {% for num in paginator.page_range %}
+            {% if page_obj.number == num %}
+              <li class="active"><a href="{% url name_space %}?page={{ num }}&query={{ request.GET.query }}">{{ num }}</a></li>
+            {% elif num|add:"-3" <= page_obj.number and page_obj.number <= num|add:"3" %}
+              <li><a href="{% url name_space %}?page={{ num }}&query={{ request.GET.query }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li><a href="{% url name_space %}?page={{ page_obj.next_page_number }}&query={{ request.GET.query }}"><i class="fa fa-angle-right"></i></a>
+            </li>
+          {% endif %}
+          <li><a href="{% url name_space %}?page={{ page_obj.paginator.num_pages }}&query={{ request.GET.query }}">尾页</a></li>
+        </ul>
+      </div>
+    {% endif %}
+
+    <div id="bloglist" class="row">
+      {% for obj in object_list %}
+        <div class="col-xs-4 col-sm-3 col-md-2">
+          <div class="panel panel-default widget-photoday">
+            <div class="panel-body">
+              <a href="" class="photoday"><img src="{{ obj.img_url }}" alt=""></a>
+              <div class="photo-details">
+                <h4 class="photo-title"><a href="{% url 'book:article_list' obj.pk %}">{{ obj.title }}</a></h4>
+              </div><!-- photo-details -->
+            </div><!-- panel-body -->
+          </div><!-- panel -->
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+
+      <div style="text-align: right;" class="mt20">
+        <ul class="pagination pagination-split" style="margin:0;">
+          {% if page_obj.has_previous %}
+            <li><a href="{% url name_space %}?page={{ page_obj.previous_page_number }}&query={{ request.GET.query }}"><i
+              class="fa fa-angle-left"></i></a></li>
+          {% endif %}
+          {% for num in paginator.page_range %}
+            {% if page_obj.number == num %}
+              <li class="active"><a href="{% url name_space %}?page={{ num }}&query={{ request.GET.query }}">{{ num }}</a></li>
+            {% elif num|add:"-3" <= page_obj.number and page_obj.number <= num|add:"3" %}
+              <li><a href="{% url name_space %}?page={{ num }}&query={{ request.GET.query }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li><a href="{% url name_space %}?page={{ page_obj.next_page_number }}&query={{ request.GET.query }}"><i class="fa fa-angle-right"></i></a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
