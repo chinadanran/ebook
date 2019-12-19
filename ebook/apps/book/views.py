@@ -1,14 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, UpdateView, DetailView
 from django.views.generic.edit import BaseDeleteView
 
 from ebook.apps.book.models import Book, Article
 
 
 class BookListView(ListView):
-    queryset = Book.objects.filter(article__isnull=False)
+    model = Book
     template_name = 'movielist.html'
     paginate_by = 18
     ordering = ['-date_created']
@@ -31,3 +31,10 @@ class ArticleListView(ListView):
         context = super().get_context_data()
         context['book'] = Book.objects.get(pk=self.kwargs['pk'])
         return context
+
+
+class ArticleView(DetailView):
+    model = Article
+    template_name = 'detail_page.html'
+
+

@@ -15,7 +15,7 @@
       <div class="col-sm-offset-6 col-md-offset-4">
       {% for object in object_list %}
         <div class="col-sm-2 col-md-3 mr10 mb10">
-          <a>{{ object.title }}</a>
+          <a href="{% url 'book:article' object.pk %}">{{ object.title }}</a>
         </div>
       {% endfor %}
       </div>

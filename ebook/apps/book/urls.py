@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from ebook.apps.book.views import BookListView, ArticleListView
+from ebook.apps.book.views import BookListView, ArticleListView, ArticleView
 
 app_name = 'movie'
 urlpatterns = [
     path('', BookListView.as_view(), name='book_list'),
     path('<int:pk>/', ArticleListView.as_view(), name='article_list'),
+    path('article/<int:pk>/', ArticleView.as_view(), name='article'),
 ]
