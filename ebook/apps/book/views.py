@@ -8,7 +8,7 @@ from ebook.apps.book.models import Book, Article
 
 
 class BookListView(ListView):
-    model = Book
+    queryset = Book.objects.filter(article__isnull=False)
     template_name = 'movielist.html'
     paginate_by = 18
     ordering = ['-date_created']
